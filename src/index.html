@@ -1,13 +1,140 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Tarea02</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Tarea02</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <style>
+      .logout-float {
+        position: fixed;
+        left: 14px;
+        right: auto;
+        bottom: 78px;
+        width: 242px;
+        text-align: left;
+        background: #0b302b;
+        border: 0;
+        color: #abc9c1;
+        border-radius: 7px;
+        padding: 12px 14px;
+        font-size: 14px;
+        z-index: 20;
+      }
+      .logout-float:hover {
+        background: #17463e;
+        color: #fff;
+      }
+    </style>
+    <style>
+      body {
+        font-size: 14px;
+      }
+      .sidebar {
+        width: 270px;
+      }
+      .nav-item {
+        font-size: 14px;
+        padding: 12px 14px;
+        gap: 14px;
+      }
+      .nav-label {
+        font-size: 11px;
+      }
+      .store-switcher b {
+        font-size: 13px;
+      }
+      .brand strong {
+        font-size: 17px;
+      }
+      .brand span {
+        font-size: 11px;
+      }
+      .topbar {
+        height: 78px;
+      }
+      .breadcrumbs {
+        font-size: 14px;
+      }
+      .content {
+        padding: 40px 44px;
+      }
+      .welcome-row h1 {
+        font-size: 32px;
+        font-weight: 700;
+      }
+      .subtitle {
+        font-size: 14px;
+      }
+      .primary-button {
+        font-size: 14px;
+        padding: 13px 18px;
+      }
+      .metric-card {
+        padding: 22px;
+        min-height: 165px;
+      }
+      .metric-heading {
+        font-size: 13px;
+      }
+      .metric-card > strong {
+        font-size: 27px;
+      }
+      .metric-card > small {
+        font-size: 12px;
+      }
+      .panel {
+        padding: 24px;
+      }
+      .panel-head h2 {
+        font-size: 17px;
+      }
+      .panel-head p {
+        font-size: 12px;
+      }
+      th {
+        font-size: 11px;
+        padding-bottom: 13px;
+      }
+      td {
+        font-size: 13px;
+        padding: 15px 10px;
+      }
+      .table-title b {
+        font-size: 13px;
+      }
+      .table-title small {
+        font-size: 11px;
+      }
+      .status {
+        font-size: 11px;
+        padding: 6px 10px;
+      }
+      .stock-item b {
+        font-size: 13px;
+      }
+      .stock-item small {
+        font-size: 11px;
+      }
+      .stock-number {
+        font-size: 12px;
+      }
+      .text-button {
+        font-size: 12px;
+      }
+      .empty-state {
+        font-size: 14px;
+      }
+      .empty-state strong {
+        font-size: 17px;
+      }
+      .logout-float {
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>

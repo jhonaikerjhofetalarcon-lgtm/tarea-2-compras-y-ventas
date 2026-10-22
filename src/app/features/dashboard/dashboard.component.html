@@ -1,0 +1,1130 @@
+<style>
+  .login-page {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    background: #fff;
+  }
+  .login-art {
+    background: linear-gradient(145deg, #0e3b34, #1b5b4d);
+    color: #fff;
+    padding: 38px 8%;
+    display: flex;
+    flex-direction: column;
+  }
+  .login-brand {
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .login-brand span,
+  .mobile-brand span {
+    display: grid;
+    place-items: center;
+    background: #efa852;
+    color: #163e36;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    font-weight: 900;
+  }
+  .art-content {
+    margin: auto 0;
+  }
+  .quote-mark {
+    font-family: Georgia;
+    font-size: 100px;
+    line-height: 0.5;
+    color: #f0b25e;
+  }
+  .art-content h1 {
+    font-size: 45px;
+    line-height: 1.08;
+    margin: 25px 0 18px;
+  }
+  .art-content em {
+    color: #f0b25e;
+    font-style: normal;
+  }
+  .art-content p {
+    line-height: 1.7;
+    color: #bdd9d1;
+  }
+  .art-footer {
+    color: #85aaa0;
+    font-size: 10px;
+  }
+  .login-box {
+    width: min(430px, 80%);
+    margin: auto;
+  }
+  .mobile-brand {
+    display: none;
+  }
+  .login-heading {
+    margin-bottom: 32px;
+  }
+  .login-heading h1 {
+    font-size: 30px;
+    color: #183c34;
+    margin: 0 0 8px;
+  }
+  .login-heading p:not(.eyebrow) {
+    font-size: 13px;
+    color: #82938e;
+  }
+  .login-box form > label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #4c675f;
+    margin: 0 0 17px;
+  }
+  .login-box input,
+  .action-form input,
+  .action-form select {
+    display: block;
+    width: 100%;
+    border: 1px solid #dce6e2;
+    border-radius: 6px;
+    padding: 11px 12px;
+    margin-top: 7px;
+    font: 12px inherit;
+    outline: 0;
+    color: #24463d;
+  }
+  .login-options {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    margin: 2px 0 22px;
+  }
+  .login-options a,
+  .login-help a {
+    color: #31846f;
+    text-decoration: none;
+  }
+  .check {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #84938f;
+  }
+  .check input {
+    width: 13px;
+    margin: 0;
+  }
+  .login-error,
+  .data-notice.error {
+    background: #fff0e9;
+    border: 1px solid #f3d4c4;
+    color: #b66147;
+    border-radius: 5px;
+    padding: 9px;
+    font-size: 10px;
+    margin: 10px 0;
+  }
+  .login-button {
+    border: 0;
+    border-radius: 6px;
+    width: 100%;
+    padding: 13px;
+    background: #dfa052;
+    color: #fff;
+    font: 600 12px inherit;
+    cursor: pointer;
+  }
+  .login-button span {
+    float: right;
+    font-size: 17px;
+  }
+  .login-help {
+    text-align: center;
+    color: #9aa8a4;
+    font-size: 10px;
+    margin-top: 25px;
+  }
+  .data-notice {
+    padding: 11px 14px;
+    border-radius: 6px;
+    font-size: 11px;
+    margin-bottom: 15px;
+  }
+  .data-notice.loading {
+    background: #edf7f3;
+    color: #317e6b;
+  }
+  .quick-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin: -12px 38px 18px;
+  }
+  .action-form {
+    display: grid;
+    gap: 14px;
+  }
+  .action-form label {
+    font-size: 10px;
+    color: #5d746b;
+    font-weight: 600;
+  }
+  .action-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: #173e3470;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+  }
+  .modal {
+    width: min(470px, 100%);
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 18px 50px #102f2940;
+  }
+  .modal h2 {
+    margin: 0;
+    color: #1c4339;
+    font-size: 20px;
+  }
+  .modal-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .modal-head button {
+    border: 0;
+    background: none;
+    font-size: 25px;
+    color: #91a09b;
+    cursor: pointer;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 35px;
+    color: #91a09b;
+    font-size: 12px;
+  }
+  .empty-state strong {
+    display: block;
+    color: #38574e;
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .stat-box {
+    padding: 15px;
+    background: #f6faf8;
+    border-radius: 7px;
+  }
+  .stat-box small {
+    color: #8b9b95;
+    font-size: 10px;
+    display: block;
+  }
+  .stat-box strong {
+    color: #275448;
+    font-size: 22px;
+    display: block;
+    margin-top: 5px;
+  }
+  @media (max-width: 700px) {
+    .login-page {
+      display: block;
+    }
+    .login-art {
+      display: none;
+    }
+    .login-box {
+      width: min(430px, 88%);
+      padding-top: 55px;
+    }
+    .mobile-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #17463d;
+      margin-bottom: 70px;
+    }
+    .action-form .form-row {
+      grid-template-columns: 1fr;
+    }
+    .quick-actions {
+      margin: 0 15px 15px;
+    }
+    .stat-strip {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+@if (!loggedIn()) {
+  <div class="login-page">
+    <div class="login-art">
+      <div class="login-brand"><span>F</span> FERRETEX</div>
+      <div class="art-content">
+        <div class="quote-mark">“</div>
+        <h1>Todo lo que necesitas,<br /><em>en un solo lugar.</em></h1>
+        <p>Gestiona tu ferretería con claridad,<br />rapidez y control.</p>
+      </div>
+      <div class="art-footer">© 2026 FERRETEX · Gestión comercial</div>
+    </div>
+    <div class="login-box">
+      <div class="mobile-brand"><span>F</span> FERRETEX</div>
+      <div class="login-heading">
+        <p class="eyebrow">PLATAFORMA DE GESTIÓN</p>
+        <h1>Bienvenido de nuevo</h1>
+        <p>Ingresa tus credenciales para continuar.</p>
+      </div>
+      <form (ngSubmit)="login()">
+        <label
+          >Correo electrónico<input
+            type="email"
+            required
+            placeholder="admin@ferretex.pe"
+            [value]="userEmail()"
+            (input)="userEmail.set($any($event.target).value)" /></label
+        ><label
+          >Contraseña<input
+            type="password"
+            required
+            placeholder="••••••••"
+            [value]="loginPassword()"
+            (input)="loginPassword.set($any($event.target).value)"
+        /></label>
+        <div class="login-options">
+          <label class="check"><input type="checkbox" /> Recordarme</label
+          ><a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+        @if (loginError()) {
+          <div class="login-error">{{ loginError() }}</div>
+        }
+        <button class="login-button" type="submit">Iniciar sesión <span>→</span></button>
+      </form>
+      <p class="login-help">¿Tienes problemas para ingresar? <a href="#">Contacta a soporte</a></p>
+    </div>
+  </div>
+} @else {
+  <div class="app-shell">
+    <aside class="sidebar" [class.open]="sidebarOpen()">
+      <div class="brand">
+        <div class="brand-mark">F</div>
+        <div><strong>FERRETEX</strong><span>Gestión comercial</span></div>
+        <button class="close-menu" (click)="toggleSidebar()">×</button>
+      </div>
+      <div class="store-switcher">
+        <span class="store-dot"></span>
+        <div><small>ESTABLECIMIENTO</small><b>Ferretex · Principal</b></div>
+      </div>
+      <nav>
+        <p class="nav-label">GESTIÓN</p>
+        @for (item of modules.slice(0, 4); track item.label) {
+          <button
+            class="nav-item"
+            [class.active]="activeModule() === item.label"
+            (click)="setModule(item.label)"
+          >
+            <span class="nav-icon">{{
+              item.icon === 'grid'
+                ? '⊞'
+                : item.icon === 'cart'
+                  ? '◫'
+                  : item.icon === 'bag'
+                    ? '▢'
+                    : '◇'
+            }}</span
+            ><span>{{ item.label }}</span>
+            @if (item.badge) {
+              <em>{{ item.badge }}</em>
+            }
+          </button>
+        }
+        <p class="nav-label second">CATÁLOGO</p>
+        @for (item of modules.slice(4); track item.label) {
+          <button
+            class="nav-item"
+            [class.active]="activeModule() === item.label"
+            (click)="setModule(item.label)"
+          >
+            <span class="nav-icon">{{
+              item.icon === 'tag'
+                ? '⌑'
+                : item.icon === 'users'
+                  ? '♙'
+                  : item.icon === 'truck'
+                    ? '▱'
+                    : '▥'
+            }}</span
+            ><span>{{ item.label }}</span>
+          </button>
+        }
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="nav-item logout-item" type="button" (click)="logout()">
+          <span class="nav-icon">↪</span><span>Cerrar sesión</span>
+        </button>
+        <div class="user-card">
+          <div class="avatar">AP</div>
+          <div><b>Administrador</b><span>FERRETEX</span></div>
+        </div>
+      </div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar">
+        <button class="menu-button" (click)="toggleSidebar()">☰</button>
+        <div class="breadcrumbs">
+          <span>Inicio</span><b>/</b><strong>{{ activeModule() }}</strong>
+        </div>
+        <div class="top-actions">
+          <div class="top-search">
+            <span>⌕</span
+            ><input
+              placeholder="Buscar"
+              [value]="searchTerm()"
+              (input)="searchTerm.set($any($event.target).value)"
+            />
+          </div>
+          <button class="avatar top-avatar">AP</button>
+        </div>
+      </header>
+      <div class="content">
+        @if (dataLoading()) {
+          <div class="data-notice loading">Cargando datos de Supabase...</div>
+        }
+        @if (dataError()) {
+          <div class="data-notice error">{{ dataError() }}</div>
+        }
+        <section class="welcome-row">
+          <div>
+            <p class="eyebrow">FERRETEX · {{ activeModule().toUpperCase() }}</p>
+            <h1>
+              {{ activeModule() === 'Resumen' ? 'Buenos días, Administrador ✦' : activeModule() }}
+            </h1>
+            <p class="subtitle">Información actual de tu operación comercial.</p>
+          </div>
+        </section>
+        @if (activeModule() === 'Resumen') {
+          <section class="metrics-grid">
+            <div class="metric-card main-metric">
+              <span>Ventas registradas</span><strong>{{ sales().length }}</strong
+              ><small>operaciones reales</small>
+            </div>
+            <div class="metric-card">
+              <span>Compras registradas</span><strong>{{ purchases().length }}</strong
+              ><small>órdenes reales</small>
+            </div>
+            <div class="metric-card">
+              <span>Productos</span><strong>{{ products().length }}</strong
+              ><small>en Supabase</small>
+            </div>
+            <div class="metric-card">
+              <span>Clientes</span><strong>{{ customers().length }}</strong
+              ><small>registrados</small>
+            </div>
+          </section>
+          <section class="dashboard-grid">
+            <div class="panel">
+              <div class="panel-head">
+                <div>
+                  <h2>Últimas ventas</h2>
+                  <p>Datos desde Supabase</p>
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>CÓDIGO</th>
+                      <th>CLIENTE</th>
+                      <th>TOTAL</th>
+                      <th>ESTADO</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (sale of sales().slice(0, 5); track sale.id) {
+                      <tr>
+                        <td>
+                          <b>{{ sale.code }}</b>
+                        </td>
+                        <td>{{ sale.customers?.name || 'Cliente general' }}</td>
+                        <td>{{ currency(sale.total) }}</td>
+                        <td>{{ sale.status }}</td>
+                      </tr>
+                    } @empty {
+                      <tr>
+                        <td colspan="4">
+                          <div class="empty-state">
+                            <strong>Sin ventas registradas</strong>Usa el módulo Ventas para
+                            registrar una.
+                          </div>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-head">
+                <div>
+                  <h2>Stock bajo</h2>
+                  <p>Productos que requieren atención</p>
+                </div>
+              </div>
+              @for (row of inventory(); track row.products?.sku) {
+                @if (row.quantity <= row.products?.min_stock) {
+                  <div class="stock-item">
+                    <span class="product-thumb"></span>
+                    <div>
+                      <b>{{ row.products?.name }}</b
+                      ><small>{{ row.products?.sku }}</small>
+                    </div>
+                    <span class="stock-number">{{ row.quantity }} un.</span>
+                  </div>
+                }
+              } @empty {
+                <div class="empty-state">No hay alertas.</div>
+              }
+            </div>
+          </section>
+        }
+        @if (activeModule() === 'Productos') {
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Productos</h2>
+                <p>{{ filteredProducts().length }} productos</p>
+              </div>
+              <button class="primary-button" (click)="openProductForm()">＋ Registrar</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>PRODUCTO</th>
+                    <th>CATEGORÍA</th>
+                    <th>STOCK</th>
+                    <th>PRECIO</th>
+                    <th>ESTADO</th>
+                    <th>ACCIONES</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (p of filteredProducts(); track p.sku) {
+                    <tr>
+                      <td>
+                        <b>{{ p.name }}</b
+                        ><small>{{ p.sku }}</small>
+                      </td>
+                      <td>{{ p.category }}</td>
+                      <td>{{ p.stock }}</td>
+                      <td>{{ currency(p.price) }}</td>
+                      <td>{{ p.status }}</td>
+                    </tr>
+                  } @empty {
+                    <tr>
+                      <td colspan="5">
+                        <div class="empty-state">
+                          <strong>No hay productos</strong>Ejecuta la carga inicial en Supabase.
+                        </div>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+        }
+        @if (activeModule() === 'Clientes') {
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Clientes</h2>
+                <p>{{ customers().length }} registros</p>
+              </div>
+              <button class="primary-button" (click)="openEntity('customer')">
+                ＋ Nuevo cliente
+              </button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>NOMBRE</th>
+                    <th>DOCUMENTO</th>
+                    <th>TELÉFONO</th>
+                    <th>CORREO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (c of customers(); track c.id) {
+                    <tr>
+                      <td>{{ c.name }}</td>
+                      <td>{{ c.document || '—' }}</td>
+                      <td>{{ c.phone || '—' }}</td>
+                      <td>{{ c.email || '—' }}</td>
+                    </tr>
+                  } @empty {
+                    <tr>
+                      <td colspan="4">
+                        <div class="empty-state">
+                          <strong>No hay clientes</strong>Registra el primero.
+                        </div>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+        }
+        @if (activeModule() === 'Proveedores') {
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Proveedores</h2>
+                <p>{{ suppliers().length }} registros</p>
+              </div>
+              <button class="primary-button" (click)="openEntity('supplier')">
+                ＋ Nuevo proveedor
+              </button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>RAZÓN SOCIAL</th>
+                    <th>RUC</th>
+                    <th>CONTACTO</th>
+                    <th>TELÉFONO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (s of suppliers(); track s.id) {
+                    <tr>
+                      <td>{{ s.business_name }}</td>
+                      <td>{{ s.ruc }}</td>
+                      <td>{{ s.contact_name || '—' }}</td>
+                      <td>{{ s.phone || '—' }}</td>
+                    </tr>
+                  } @empty {
+                    <tr>
+                      <td colspan="4">
+                        <div class="empty-state">
+                          <strong>No hay proveedores</strong>Registra el primero.
+                        </div>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+        }
+        @if (activeModule() === 'Ventas') {
+          <div class="quick-actions">
+            <button class="primary-button" (click)="openAction('sale')">＋ Nueva venta</button>
+          </div>
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Ventas</h2>
+                <p>{{ sales().length }} operaciones</p>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>CÓDIGO</th>
+                    <th>CLIENTE</th>
+                    <th>FECHA</th>
+                    <th>MÉTODO</th>
+                    <th>TOTAL</th>
+                    <th>ESTADO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (sale of sales(); track sale.id) {
+                    <tr>
+                      <td>{{ sale.code }}</td>
+                      <td>{{ sale.customers?.name || 'Cliente general' }}</td>
+                      <td>{{ sale.created_at | date: 'dd/MM/yyyy HH:mm' }}</td>
+                      <td>{{ sale.payment_method }}</td>
+                      <td>{{ currency(sale.total) }}</td>
+                      <td>{{ sale.status }}</td>
+                    </tr>
+                  } @empty {
+                    <tr>
+                      <td colspan="7">
+                        <div class="empty-state">
+                          <strong>No hay ventas</strong>Registra la primera venta.
+                        </div>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+        }
+        @if (activeModule() === 'Compras') {
+          <div class="quick-actions">
+            <button class="primary-button" (click)="openAction('purchase')">＋ Nueva compra</button>
+          </div>
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Compras</h2>
+                <p>{{ purchases().length }} órdenes</p>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>CÓDIGO</th>
+                    <th>PROVEEDOR</th>
+                    <th>FECHA</th>
+                    <th>TOTAL</th>
+                    <th>ESTADO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (purchase of purchases(); track purchase.id) {
+                    <tr>
+                      <td>{{ purchase.code }}</td>
+                      <td>{{ purchase.suppliers?.business_name || '—' }}</td>
+                      <td>{{ purchase.created_at | date: 'dd/MM/yyyy HH:mm' }}</td>
+                      <td>{{ currency(purchase.total) }}</td>
+                      <td>{{ purchase.status }}</td>
+                    </tr>
+                  } @empty {
+                    <tr>
+                      <td colspan="5">
+                        <div class="empty-state">
+                          <strong>No hay compras</strong>Registra la primera compra.
+                        </div>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+        }
+        @if (activeModule() === 'Inventario') {
+          <div class="quick-actions">
+            <button class="primary-button" (click)="openStockAdjustment()">
+              ＋ Registrar entrada
+            </button>
+          </div>
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Inventario</h2>
+                <p>{{ inventory().length }} existencias</p>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>PRODUCTO</th>
+                    <th>CÓDIGO</th>
+                    <th>ALMACÉN</th>
+                    <th>EXISTENCIA</th>
+                    <th>MÍNIMO</th>
+                    <th>ESTADO</th>
+                    <th>ACCIONES</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (row of inventory(); track row.products?.sku) {
+                    <tr>
+                      <td>{{ row.products?.name }}</td>
+                      <td>{{ row.products?.sku }}</td>
+                      <td>{{ row.warehouses?.name }}</td>
+                      <td>{{ row.quantity }}</td>
+                      <td>{{ row.products?.min_stock }}</td>
+                      <td>
+                        {{ row.quantity <= row.products?.min_stock ? 'Stock bajo' : 'Normal' }}
+                      </td>
+                      <td>
+                        <button
+                          class="table-action-button"
+                          type="button"
+                          (click)="openStockAdjustment(row.products?.id)"
+                        >
+                          + Aumentar
+                        </button>
+                      </td>
+                    </tr>
+                  } @empty {
+                    <tr>
+                      <td colspan="7">
+                        <div class="empty-state"><strong>No hay existencias</strong></div>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+        }
+        @if (activeModule() === 'Reportes') {
+          <section class="stat-strip">
+            <div class="stat-box">
+              <small>Ventas</small><strong>{{ sales().length }}</strong>
+            </div>
+            <div class="stat-box">
+              <small>Compras</small><strong>{{ purchases().length }}</strong>
+            </div>
+            <div class="stat-box">
+              <small>Movimientos de inventario</small><strong>{{ inventory().length }}</strong>
+            </div>
+          </section>
+          <section class="panel">
+            <h2>Reporte operativo</h2>
+            <p class="subtitle">Información calculada desde Supabase.</p>
+            <div class="table-wrap">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Productos registrados</td>
+                    <td>
+                      <b>{{ products().length }}</b>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Clientes registrados</td>
+                    <td>
+                      <b>{{ customers().length }}</b>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Proveedores registrados</td>
+                    <td>
+                      <b>{{ suppliers().length }}</b>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        }
+      </div>
+    </main>
+  </div>
+  @if (showProductForm()) {
+    <div class="modal-backdrop">
+      <div class="modal">
+        <div class="modal-head">
+          <h2>Registrar producto</h2>
+          <button (click)="showProductForm.set(false)">×</button>
+        </div>
+        <form #productForm="ngForm" class="action-form" (ngSubmit)="addProduct(productForm.value)">
+          <label>Nombre<input name="name" ngModel required /></label>
+          <div class="form-row">
+            <label
+              >Código del producto<input
+                name="sku"
+                [ngModel]="productCodeSuggestion()"
+                placeholder="001"
+              /><small class="field-hint"
+                >Se propone automáticamente el siguiente código disponible.</small
+              ></label
+            ><label
+              >Categoría<select name="category" ngModel required>
+                <option value="">Seleccionar categoría</option>
+                @for (category of categories(); track category.id ?? category.name) {
+                  <option [value]="category.name">{{ category.name }}</option>
+                }
+              </select></label
+            >
+          </div>
+          <div class="form-row">
+            <label>Stock inicial<input name="stock" ngModel type="number" /></label
+            ><label>Precio de venta<input name="price" ngModel type="number" step=".01" /></label>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="secondary-button" (click)="showProductForm.set(false)">
+              Cancelar</button
+            ><button class="primary-button">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+  @if (showEntityForm()) {
+    <div class="modal-backdrop">
+      <div class="modal">
+        <div class="modal-head">
+          <h2>{{ entityType() === 'customer' ? 'Nuevo cliente' : 'Nuevo proveedor' }}</h2>
+          <button (click)="showEntityForm.set(false)">×</button>
+        </div>
+        @if (entityType() === 'customer') {
+          <form
+            #customerForm="ngForm"
+            class="action-form"
+            (ngSubmit)="addCustomer(customerForm.value)"
+          >
+            <label>Nombre<input name="name" ngModel required /></label>
+            <div class="form-row">
+              <label>DNI/RUC<input name="document" ngModel /></label
+              ><label>Teléfono<input name="phone" ngModel /></label>
+            </div>
+            <label>Correo<input name="email" ngModel type="email" /></label>
+            <div class="modal-actions">
+              <button type="button" class="secondary-button" (click)="showEntityForm.set(false)">
+                Cancelar</button
+              ><button class="primary-button">Guardar</button>
+            </div>
+          </form>
+        } @else {
+          <form
+            #supplierForm="ngForm"
+            class="action-form"
+            (ngSubmit)="addSupplier(supplierForm.value)"
+          >
+            <label>Razón social<input name="business_name" ngModel required /></label>
+            <div class="form-row">
+              <label>RUC<input name="ruc" ngModel required /></label
+              ><label>Contacto<input name="contact_name" ngModel /></label>
+            </div>
+            <div class="form-row">
+              <label>Teléfono<input name="phone" ngModel /></label
+              ><label>Condición de pago<input name="payment_terms" ngModel /></label>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="secondary-button" (click)="showEntityForm.set(false)">
+                Cancelar</button
+              ><button class="primary-button">Guardar</button>
+            </div>
+          </form>
+        }
+      </div>
+    </div>
+  }
+  @if (showActionForm() === 'sale') {
+    <div class="modal-backdrop">
+      <div class="modal">
+        <div class="modal-head">
+          <h2>Nueva venta</h2>
+          <button (click)="showActionForm.set(null)">×</button>
+        </div>
+        <form #saleForm="ngForm" class="action-form" (ngSubmit)="registerSale(saleForm.value)">
+          <label
+            >Producto<select
+              name="product_id"
+              [ngModel]="saleProductId()"
+              (ngModelChange)="selectSaleProduct($event)"
+              required
+            >
+              <option value="">Seleccionar producto</option>
+              @for (product of products(); track product.id ?? product.sku) {
+                <option [value]="product.id" [disabled]="product.stock <= 0">
+                  {{ product.name }} · {{ product.sku }} · Stock: {{ product.stock }}
+                </option>
+              }
+            </select></label
+          >
+          <div class="form-row">
+            <label>Cantidad<input name="quantity" ngModel type="number" min="1" required /></label
+            ><label
+              >Precio unitario<input
+                name="price"
+                [ngModel]="saleUnitPrice() > 0 ? saleUnitPrice() : ''"
+                type="number"
+                step=".01"
+                readonly
+              /><small class="field-hint">Se toma automáticamente desde Productos.</small></label
+            >
+          </div>
+          <label
+            >Cliente<select name="customer_id" ngModel>
+              <option value="">Cliente general</option>
+              @for (c of customers(); track c.id) {
+                <option [value]="c.id">{{ c.name }}</option>
+              }
+            </select></label
+          ><label
+            >Método de pago<select name="payment_method" ngModel>
+              <option value="efectivo">Efectivo</option>
+              <option value="transferencia">Transferencia</option>
+              <option value="credito">Crédito</option>
+            </select></label
+          >
+          <div class="modal-actions">
+            <button type="button" class="secondary-button" (click)="showActionForm.set(null)">
+              Cancelar</button
+            ><button class="primary-button">Confirmar venta</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+  @if (saleReceipt(); as receipt) {
+    <div class="modal-backdrop receipt-backdrop">
+      <section class="modal receipt-modal" aria-labelledby="receipt-title">
+        <div class="modal-head">
+          <div>
+            <span class="eyebrow">FERRETEX</span>
+            <h2 id="receipt-title">Comprobante de venta</h2>
+          </div>
+          <button type="button" aria-label="Cerrar comprobante" (click)="saleReceipt.set(null)">
+            ×
+          </button>
+        </div>
+        <div class="receipt-meta">
+          <div>
+            <small>Comprobante</small><strong>{{ receipt.code }}</strong>
+          </div>
+          <div>
+            <small>Fecha</small><strong>{{ receipt.created_at | date: 'dd/MM/yyyy HH:mm' }}</strong>
+          </div>
+          <div>
+            <small>Cliente</small><strong>{{ receipt.customer }}</strong>
+          </div>
+          <div>
+            <small>Pago</small><strong>{{ receipt.payment_method }}</strong>
+          </div>
+        </div>
+        <div class="receipt-items">
+          @for (item of receipt.items; track item.sku + item.quantity) {
+            <div class="receipt-item">
+              <div>
+                <strong>{{ item.name }}</strong>
+                <small>Código {{ item.sku }} · {{ item.quantity }} unidad(es)</small>
+              </div>
+              <span>{{ currency(item.subtotal) }}</span>
+            </div>
+          }
+        </div>
+        <div class="receipt-total">
+          <span>Total</span><strong>{{ currency(receipt.total) }}</strong>
+        </div>
+        <div class="modal-actions receipt-actions">
+          <button type="button" class="secondary-button" (click)="saleReceipt.set(null)">
+            Cerrar
+          </button>
+          <button type="button" class="primary-button" (click)="printSaleReceipt()">
+            Imprimir comprobante
+          </button>
+        </div>
+      </section>
+    </div>
+  }
+  @if (showActionForm() === 'purchase') {
+    <div class="modal-backdrop">
+      <div class="modal">
+        <div class="modal-head">
+          <h2>Nueva compra</h2>
+          <button (click)="showActionForm.set(null)">×</button>
+        </div>
+        <form
+          #purchaseForm="ngForm"
+          class="action-form"
+          (ngSubmit)="createPurchase(purchaseForm.value)"
+        >
+          <label
+            >Proveedor<select name="supplier_id" ngModel required>
+              <option value="">Seleccionar</option>
+              @for (s of suppliers(); track s.id) {
+                <option [value]="s.id">{{ s.business_name }}</option>
+              }
+            </select></label
+          ><label
+            >Producto<select name="product_id" ngModel required>
+              <option value="">Seleccionar producto</option>
+              @for (product of products(); track product.id ?? product.sku) {
+                <option [value]="product.id">
+                  {{ product.name }} · Código: {{ product.sku }} · Stock: {{ product.stock }}
+                </option>
+              }
+            </select></label
+          >
+          <div class="form-row">
+            <label>Cantidad<input name="quantity" ngModel type="number" min="1" required /></label
+            ><label
+              >Costo unitario<input name="cost" ngModel type="number" step=".01" required
+            /></label>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="secondary-button" (click)="showActionForm.set(null)">
+              Cancelar</button
+            ><button class="primary-button">Guardar compra</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+  @if (showActionForm() === 'adjustment') {
+    <div class="modal-backdrop">
+      <div class="modal">
+        <div class="modal-head">
+          <h2>Registrar movimiento de stock</h2>
+          <button (click)="showActionForm.set(null)">×</button>
+        </div>
+        <form #adjustForm="ngForm" class="action-form" (ngSubmit)="adjustStock(adjustForm.value)">
+          <label
+            >Producto<select name="product_id" [ngModel]="adjustmentDefaults().product_id" required>
+              <option value="">Seleccionar producto</option>
+              @for (product of products(); track product.id ?? product.sku) {
+                <option [value]="product.id">
+                  {{ product.name }} · Stock actual: {{ product.stock }}
+                </option>
+              }
+            </select></label
+          >
+          <label
+            >Código asignado<input
+              [value]="productCode(adjustForm.value.product_id)"
+              readonly
+            /><small class="field-hint"
+              >El código se completa automáticamente al elegir el producto.</small
+            ></label
+          >
+          <div class="form-row">
+            <label
+              >Tipo<select name="movement_type" [ngModel]="adjustmentDefaults().movement_type">
+                <option value="entrada">Entrada</option>
+                <option value="salida">Salida</option>
+              </select></label
+            ><label>Cantidad<input name="quantity" ngModel type="number" min="1" required /></label>
+          </div>
+          <label
+            >Motivo<input name="reason" ngModel required placeholder="Inventario físico"
+          /></label>
+          <div class="modal-actions">
+            <button type="button" class="secondary-button" (click)="showActionForm.set(null)">
+              Cancelar</button
+            ><button class="primary-button">Guardar movimiento</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+  <router-outlet />
+}
